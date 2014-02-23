@@ -1,0 +1,22 @@
+{
+  "name": "boleto-nodejs",
+  "version": "0.0.1",
+  "description": "Boleto generator in Node.js",
+  "main": "index.js",
+  "scripts": {
+	"test": "npm test"
+  },
+  "repository": {
+	"type": "git",
+	"url": "https://github.com/pagarme/boleto-nodejs"
+  },
+  "dependencies": {
+	"ejs": "0.8.5",
+  },
+  "author": "Pedro Franceschi",
+  "license": "MIT",
+  "bugs": {
+	"url": "https://github.com/pagarme/boleto-nodejs/issues"
+  },
+  "homepage": "https://github.com/pagarme/boleto-nodejs"
+}
