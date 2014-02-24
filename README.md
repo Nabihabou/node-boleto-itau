@@ -9,7 +9,7 @@ Geração de boleto bancário em Node.js. Os algoritmos de geração da linha di
 
 ## Exemplo de uso
 
-```
+```javascript
 var Boleto = require('node-boleto');
 
 var boleto = new Boleto({
@@ -39,7 +39,7 @@ A engine `bmp` aproveita da característica monodimensional dos códigos de barr
 
 Para alterar a engine de renderização padrão:
 
-```
+```javascript
 Boleto.barcodeRenderEngine = 'bmp';
 ```
 
