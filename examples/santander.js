@@ -8,13 +8,13 @@ var boleto = new Boleto({
   'banco': "santander",
   'data_emissao': new Date(),
   'data_vencimento': new Date(new Date().getTime() + 5 * 24 * 3600 * 1000),
-  'valor': 15049,
-  'nosso_numero': "1231231",
+  'valor': 1500,
+  'nosso_numero': "1234567",
   'numero_documento': "123123",
-  'beneficiario': "Pagar.me Pagamentos S/A",
-  'beneficiario_cnpj': "18727053000174",
+  'cedente': "Pagar.me Pagamentos S/A",
+  'cedente_cnpj': "18727053000174",
   'agencia': "3978",
-  'codigo_beneficiario': "6404154", // PSK (código da carteira)
+  'codigo_cedente': "6404154", // PSK (código da carteira)
   'carteira': "102"
 })
 

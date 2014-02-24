@@ -148,7 +148,7 @@ img{border:0}
             <td class="barra"></td>
 			<td class="w72 Ab bc Ac"><%= boleto['codigo_banco'] %></td>
             <td class="barra"></td>
-            <td class="w500 Ar Ab ld">03399.64140 12500.000000 05136.501029 1 59840000001500</td>
+			<td class="w500 Ar Ab ld"><%= boleto['linha_digitavel'] %></td>
         </tr>
     </table><table class="w666">
         <tr class="ct h13 At">
@@ -159,11 +159,11 @@ img{border:0}
             <td class="w128">Carteira / Nosso número</td>
         </tr>
         <tr class="cp h12 At rBb">
-			<td><%= boleto['beneficiario'] %></td>
-			<td><%= boleto['agencia'] %>/<%= boleto['codigo_beneficiario'] %></td>
+			<td><%= boleto['cedente'] %></td>
+			<td><%= boleto['agencia'] %>/<%= boleto['codigo_cedente'] %></td>
             <td>R$</td>
             <td></td>
-			<td class="Ar"><%= boleto['carteira'] %>/<%= boleto['nosso_numero'] %></td>
+			<td class="Ar"><%= addTrailingZeros(boleto['nosso_numero'], 12) %>-<%= boleto['nosso_numero_dv'] %></td>
         </tr>
     </table><table class="w666">
         <tr class="ct h13">
@@ -174,7 +174,7 @@ img{border:0}
         </tr>
         <tr class="cp h12 rBb">
 			<td><%= boleto['numero_documento'] %></td>
-			<td><%= boleto['beneficiario_cnpj'] %></td>
+			<td><%= boleto['cedente_cnpj'] %></td>
 			<td><%= formatDate(boleto['data_vencimento']) %></td>
 			<td class="Ar"><%= formatAmount(boleto['valor']) %></td>
         </tr>
@@ -225,7 +225,7 @@ img{border:0}
             <td class="barra"></td>
 			<td class="w72 Ab bc Ac"><%= boleto['codigo_banco'] %></td>
             <td class="barra"></td>
-            <td class="w500 Ar Ab ld">03399.64140 12500.000000 05136.501029 1 59840000001500</td>
+			<td class="w500 Ar Ab ld"><%= boleto['linha_digitavel'] %></td>
         </tr>
     </table><table class="w666">
         <tr class="ct h13">
@@ -242,8 +242,8 @@ img{border:0}
             <td class="w180">Agência / Código beneficiário</td>
         </tr>
         <tr class="cp h12 rBb">
-			<td><%= boleto['beneficiario'] %></td>
-			<td class="Ar"><%= boleto['agencia'] %>/<%= boleto['codigo_beneficiario'] %></td>
+			<td><%= boleto['cedente'] %></td>
+			<td class="Ar"><%= boleto['agencia'] %>/<%= boleto['codigo_cedente'] %></td>
         </tr>
     </table><table class="w666">
         <tr class="ct h13">
@@ -260,7 +260,7 @@ img{border:0}
             <td>DM</td>
             <td>N</td>
 			<td><%= formatDate(boleto['data_emissao']) %></td>
-			<td class="Ar"><%= boleto['carteira'] %>/<%= boleto['nosso_numero'] %></td>
+			<td class="Ar"><%= addTrailingZeros(boleto['nosso_numero'], 12) %>-<%= boleto['nosso_numero_dv'] %></td>
         </tr>
     </table><table class="w666">
         <tr class="ct h13">
