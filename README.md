@@ -5,7 +5,7 @@ Geração de boleto bancário em Node.js. Os algoritmos de geração da linha di
 
 ## Bancos suportados
 
-- Santander: by [pedrofranceschi](https://github.com/pedrofranceschi)
+- Santander - by [pedrofranceschi](https://github.com/pedrofranceschi)
 
 ## Exemplo de uso
 
@@ -24,7 +24,14 @@ var boleto = new Boleto({
   'agencia': "3978",
   'codigo_cedente': "6404154", // PSK (código da carteira)
   'carteira': "102"
-})
+});
+
+console.log("Linha digitável: " + boleto['linha_digitavel'])
+
+boleto.renderHTML(function(html){
+  console.log(html);
+});
+
 ```
 
 ## Adicionando novos bancos
