@@ -12,19 +12,19 @@ Bank.prototype.dvBarra = function(barra) {
   return (resto2 == 0 || resto2 == 1 || resto2 == 10) ? 1 : 11 - resto2;
 }
 
-Bank.prototype.barcodeData = function(options){
+Bank.prototype.barcodeData = function(boleto){
   var codigoBanco = this.options.codigo;
   var numMoeda = "9";
   var fixo = "9"; // Numero fixo para a posição 05-05
   var ios = "0"; // IOS - somente para Seguradoras (Se 7% informar 7, limitado 9%) - demais clientes usar 0
   
-  var fatorVencimento = this.formatters.fatorVencimento(options['data_vencimento']);
+  var fatorVencimento = this.formatters.fatorVencimento(boleto['data_vencimento']);
 
-  var valor = this.formatters.addTrailingZeros(options['valor'], 10);
-  var carteira = options['carteira'];
-  var codigoCedente = this.formatters.addTrailingZeros(options['codigo_cedente'], 7);
+  var valor = this.formatters.addTrailingZeros(boleto['valor'], 10);
+  var carteira = boleto['carteira'];
+  var codigoCedente = this.formatters.addTrailingZeros(boleto['codigo_cedente'], 7);
 
-  var nossoNumero = this.formatters.addTrailingZeros(options['nosso_numero'], 12) + this.formatters.mod11(options['nosso_numero']);
+  var nossoNumero = this.formatters.addTrailingZeros(boleto['nosso_numero'], 12) + this.formatters.mod11(boleto['nosso_numero']);
 
   var barra = codigoBanco + numMoeda + fatorVencimento + valor + fixo + codigoCedente + nossoNumero + ios + carteira;
 

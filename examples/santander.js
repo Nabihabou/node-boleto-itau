@@ -18,6 +18,8 @@ var boleto = new Boleto({
   'carteira': "102"
 })
 
+console.log(boleto['linha_digitavel']);
+
 app.use(express.static(__dirname + '/../'));
 
 app.get('/', function(req, res){
