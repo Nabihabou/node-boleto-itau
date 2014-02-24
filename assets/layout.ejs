@@ -1,162 +1,149 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1"><title>Visualização de boleto</title>
+<head>
+  <title>Visualização de boleto</title>
+  <style media="screen, print" type="text/css">
+  body
+  {
+	  color:#000000;
+	  background-color:#ffffff;
+	  margin-top:0;
+	  margin-right:0;
+  }
+
+  *{margin:0px;padding:0px}
+  table{border:0;border-collapse:collapse;padding:0}
+
+  img{border:0}
+
+  .cp 
+  {
+	  font: bold 10px arial; 
+	  color: black
+  }
+  .ti 
+  {
+	  font: 9px arial, helvetica, sans-serif
+  }
+  .ld 
+  {
+	  font: bold 15px arial; 
+	  color: #000000
+  }
+  .ct 
+  {
+	  font: 9px "arial narrow"; 
+	  color: #000033
+  }
+  .cn 
+  {
+	  font: 9px arial; 
+	  color: black
+  }
+  .bc 
+  {
+	  font: bold 22px arial; 
+	  color: #000000
+  }
+
+  .cut{width:665px;height:1px;border-top:dashed 1px #000}
+  .Ac{text-align:center}
+  .Ar{text-align:right}
+  .Al{text-align:left}
+  .At{vertical-align:top}
+  .Ab{vertical-align:bottom}
+  .ct td, .cp td{padding-left:6px;border-left:solid 1px #000}
+  .cpN{font:bold 10px arial;color:black}
+  .ctN{font:9px "arial narrow";color:#000033}
+  .pL0{padding-left:0px}
+  .pL6{padding-left:6px}
+  .pL10{padding-left:10px}
+  .imgLogo{width:150px}
+  .imgLogo img{width:150px;height:40px}
+  .barra{width:2px;height:15px;;background-color:#000;}
+  .rBb td{border-bottom:solid 1px #000}
+  .BB{border-bottom:solid 1px #000}
+  .BL{border-left:solid 1px #000}
+  .BR{border-right:solid 1px #000}
+  .BT1{border-top:dashed 1px #000}
+  .BT2{border-top:solid 2px #000}
+  .h1{height:1px}
+  .h13{height:13px}
+  .h12{height:12px}
+  .h13 td{vertical-align:top}
+  .h12 td{vertical-align:top}
+  .w6{width:6px}
+  .w7{width:7px;}
+  .w34{width:34px}
+  .w45{width:45px}
+  .w53{width:53px}
+  .w62{width:62px}
+  .w65{width:65px}
+  .w72{width:72px}
+  .w83{width:83px}
+  .w88{width:88px}
+  .w104{width:104px}
+  .w105{width:105px}
+  .w106{width:106px}
+  .w113{width:113px}
+  .w112{width:112px}
+  .w123{width:123px}
+  .w126{width:126px}
+  .w128{width:128px}
+  .w132{width:132px}
+  .w134{width:134px}
+  .w150{width:150px}
+  .w163{width:163px}
+  .w164{width:164px}
+  .w180{width:180px}
+  .w182{width:182px}
+  .w186{width:186px}
+  .w192{width:192px}
+  .w250{width:250px}
+  .w298{width:298px}
+  .w409{width:409px}
+  .w472{width:472px}
+  .w478{width:478px}
+  .w500{width:500px}
+  .w544{width:544px}
+  .w564{width:564px}
+  .w659{width:659px}
+  .w666{width:666px}
+  .w667{width:667px}
+  .BHead td{border-bottom:solid 2px #000}
+  .EcdBar{height:50px;vertical-align:bottom}
+  .rc6 td{vertical-align:top;border-bottom:solid 1px #000;border-left:solid 1px #000}
+  .rc6 div{padding-left:6px}
+  .rc6 .t{font:9px "arial narrow";color:#000033;height:13px}
+  .rc6 .c{font:bold 10px arial;color:black;height:12px}
+  .mt23{margin-top:23px;}
+  .pb4{padding-bottom:14px;}
+  .ebc{width:4px;height:440px;border-right:dotted 1px #000000;margin-right:4px;}
+  <% if (barcode_render_engine == 'bmp') { %>
+	.barcode {
+		background-image: url(data:image/bmp;base64,<%= barcode_data %>);
+		background-repeat: repeat-y;
+		height: <%= barcode_height %>px;
+	}
+  <% } else if (barcode_render_engine == 'img') { %>
+	.barcode {
+	  height: <%= barcode_height %>px;
+	}
+
+	.barcode-line {
+	  height: inherit;
+	  display: inline-block;
+	  float: left;
+	}
+  <% } %>
+  @media print
+  {
+	  * {-webkit-print-color-adjust:exact;}
+  }
+  </style>
 </head>
-<style media="screen, print" type="text/css">
-body
-{
-	color:#000000;
-	background-color:#ffffff;
-	margin-top:0;
-	margin-right:0;
-}
-
-*{margin:0px;padding:0px}
-table{border:0;border-collapse:collapse;padding:0}
-
-img{border:0}
-
-.cp 
-{
-	font: bold 10px arial; 
-	color: black
-}
-.ti 
-{
-	font: 9px arial, helvetica, sans-serif
-}
-.ld 
-{
-	font: bold 15px arial; 
-	color: #000000
-}
-.ct 
-{
-	font: 9px "arial narrow"; 
-	color: #000033
-}
-.cn 
-{
-	font: 9px arial; 
-	color: black
-}
-.bc 
-{
-	font: bold 22px arial; 
-	color: #000000
-}
-
-.cut{width:665px;height:1px;border-top:dashed 1px #000}
-.Ac{text-align:center}
-.Ar{text-align:right}
-.Al{text-align:left}
-.At{vertical-align:top}
-.Ab{vertical-align:bottom}
-.ct td, .cp td{padding-left:6px;border-left:solid 1px #000}
-.cpN{font:bold 10px arial;color:black}
-.ctN{font:9px "arial narrow";color:#000033}
-.pL0{padding-left:0px}
-.pL6{padding-left:6px}
-.pL10{padding-left:10px}
-.imgLogo{width:150px}
-.imgLogo img{width:150px;height:40px}
-.barra{width:2px;height:15px;;background-color:#000;}
-.rBb td{border-bottom:solid 1px #000}
-.BB{border-bottom:solid 1px #000}
-.BL{border-left:solid 1px #000}
-.BR{border-right:solid 1px #000}
-.BT1{border-top:dashed 1px #000}
-.BT2{border-top:solid 2px #000}
-.h1{height:1px}
-.h13{height:13px}
-.h12{height:12px}
-.h13 td{vertical-align:top}
-.h12 td{vertical-align:top}
-.w6{width:6px}
-.w7{width:7px;}
-.w34{width:34px}
-.w45{width:45px}
-.w53{width:53px}
-.w62{width:62px}
-.w65{width:65px}
-.w72{width:72px}
-.w83{width:83px}
-.w88{width:88px}
-.w104{width:104px}
-.w105{width:105px}
-.w106{width:106px}
-.w113{width:113px}
-.w112{width:112px}
-.w123{width:123px}
-.w126{width:126px}
-.w128{width:128px}
-.w132{width:132px}
-.w134{width:134px}
-.w150{width:150px}
-.w163{width:163px}
-.w164{width:164px}
-.w180{width:180px}
-.w182{width:182px}
-.w186{width:186px}
-.w192{width:192px}
-.w250{width:250px}
-.w298{width:298px}
-.w409{width:409px}
-.w472{width:472px}
-.w478{width:478px}
-.w500{width:500px}
-.w544{width:544px}
-.w564{width:564px}
-.w659{width:659px}
-.w666{width:666px}
-.w667{width:667px}
-.BHead td{border-bottom:solid 2px #000}
-.EcdBar{height:50px;vertical-align:bottom}
-.rc6 td{vertical-align:top;border-bottom:solid 1px #000;border-left:solid 1px #000}
-.rc6 div{padding-left:6px}
-.rc6 .t{font:9px "arial narrow";color:#000033;height:13px}
-.rc6 .c{font:bold 10px arial;color:black;height:12px}
-.mt23{margin-top:23px;}
-.pb4{padding-bottom:14px;}
-.ebc{width:4px;height:440px;border-right:dotted 1px #000000;margin-right:4px;}
-<% if (barcode_render_engine == 'bmp') { %>
-  .barcode {
-	  background-image: url(data:image/bmp;base64,<%= barcode_data %>);
-	  background-repeat: repeat-y;
-	  height: 50px;
-  }
-<% } else if (barcode_render_engine == 'css') { %>
-  .barcode {
-	height: 50px;
-  }
-
-  .barcode-line {
-	height: inherit;
-	display: inline-block;
-	float: left;
-  }
-
-  .black-line {
-	background-color: #000;
-  }
-
-  .white-line {
-	background-color: #fff;
-  }
-<% } %>
-@media print
-{
-	* {-webkit-print-color-adjust:exact;}
-}
-</style>
 <body>
-    <form method="post" action="ViewBoleto.aspx?2597e782-ff81-40b0-b260-2f3803bf35b5" id="form1">
-<div class="aspNetHidden">
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJMTQ3NzA1OTg1ZGQ4PloNH7dQxEV+hB958EChJ+QWEw==" />
-</div>
-
-    <div>
-        <div id="UxPanelBoletoContainer">
+	<div id="UxPanelBoletoContainer">
 	<table class="w666">
         <tr class="cpN">
             <td class="At Ac">Instruções de Impressão</td>
@@ -354,13 +341,13 @@ img{border:0}
 		  <td class="EcdBar Al pL10">
 			<% if (barcode_render_engine == 'bmp') { %>
 			  <div class="barcode"/>
-			<% } else if (barcode_render_engine == 'css') { %>
+			<% } else if (barcode_render_engine == 'img') { %>
 			  <div class="barcode">
 				<% var black = true; %>
 
 				<% for(var i = 0; i < barcode_data.length; i++) { %>
 				  <% var pixelsToDraw = (barcode_data[i] == "0") ? 1 : 3; %>
-				  <div class="barcode-line <%= black ? 'black' : 'white' %>-line" style="width:<%= pixelsToDraw %>px;"></div>
+				  <img class="barcode-line" src="https://pagar.me/assets/boleto/images/<%= black ? 'b' : 'w' %>.png" height="<%= barcode_height %>px" width="<%= pixelsToDraw %>px;" border=0/>
 				  <% black = !black; %>
 				<% } %>
 			  </div>
@@ -381,7 +368,5 @@ img{border:0}
         <tr class="h13"><td /></tr>
     </table>
 </div>
-    </div>
-    </form>
 </body>
 </html>
