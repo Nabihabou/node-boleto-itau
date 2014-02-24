@@ -18,6 +18,8 @@ var boleto = new Boleto({
   'carteira': "102"
 })
 
+app.use(express.static(__dirname + '/../'));
+
 app.get('/', function(req, res){
   boleto.renderHTML(function(html){
 	return res.send(html);
