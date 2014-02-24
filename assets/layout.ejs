@@ -119,10 +119,34 @@ img{border:0}
 .mt23{margin-top:23px;}
 .pb4{padding-bottom:14px;}
 .ebc{width:4px;height:440px;border-right:dotted 1px #000000;margin-right:4px;}
-.barcode {
-    background-image: url(data:image/bmp;base64,Qk3iBgAAAAAAAIoAAAB8AAAAlgEAAAEAAAABACAAAwAAAFgGAAATCwAAEwsAAAAAAAAAAAAAAAD/AAD/AAD/AAAAAAAA/0JHUnOAwvUoYLgeFSCF6wFAMzMTgGZmJkBmZgagmZkJPArXAyRcjzIAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA//////8AAAD/+/v7/wQEBP/9/f3///////////8AAAD//Pz8///////9/f3/AQEB/wAAAP8CAgL//v7+/wAAAP8AAAD/AgIC//z8/P8BAQH//////wAAAP8DAwP/AAAA//////8AAAD/AAAA/wEBAf/+/v7///////39/f8BAQH//Pz8/wQEBP/9/f3///////7+/v8AAAD//f39/wEBAf8AAAD/AAAA//39/f///////////wAAAP//////AAAA/////////////f39/wAAAP//////AAAA/wAAAP8AAAD//////wAAAP////////////v7+/8CAgL/AAAA/wAAAP//////AAAA//39/f8CAgL/AAAA/wEBAf///////f39//////8AAAD//////wAAAP//////AQEB//////8BAQH/AAAA/wAAAP/9/f3///////////8AAAD////////////8/Pz/AwMD/wAAAP8AAAD//////wAAAP/+/v7/AAAA//////8AAAD/AAAA/wEBAf/+/v7///////39/f8BAQH/AAAA/wAAAP/9/f3///////////8AAAD//////wAAAP//////AAAA//39/f8CAgL/AAAA/wEBAf///////v7+//////8AAAD/AAAA/wAAAP//////+vr6//////8BAQH//Pz8/wQEBP/9/f3///////7+/v8AAAD//f39/wAAAP8BAQH/AAAA//////8AAAD/AAAA/wAAAP//////AAAA//z8/P///////f39/wEBAf8AAAD/AgIC//7+/v8AAAD//////wAAAP8AAAD/AQEB//7+/v///////f39/wAAAP/+/v7///////39/f8CAgL//////wAAAP//////AAAA//z8/P///////f39/wEBAf8AAAD/AgIC//7+/v8BAQH/AAAA/wAAAP/9/f3///////////8AAAD//////wAAAP//////AwMD/wAAAP8AAAD//v7+/wICAv8AAAD/AAAA//7+/v///////f39/wICAv//////AAAA/////////////Pz8/wMDA/8AAAD/AAAA//////8AAAD//v7+/wAAAP////////////39/f8AAAD//////wAAAP8AAAD/AAAA//z8/P///////f39/wEBAf8AAAD/AgIC//7+/v8AAAD//v7+///////9/f3/AgIC//////8AAAD//////wAAAP8FBQX/AAAA/////////////////wAAAP8BAQH/AAAA//////8AAAD//f39/wICAv8AAAD/AQEB/////////////f39/wEBAf////////////z8/P8AAAD//////wAAAP//////AAAA//39/f8CAgL/AAAA/wEBAf///////v7+//////8AAAD/AAAA/wAAAP//////+vr6//////8AAAD//v7+/wAAAP//////AAAA//////8AAAD/AgIC/wAAAP/8/Pz///////39/f8BAQH/AAAA/wICAv/+/v7//f39//////8AAAD//////wAAAP//////AQEB//////8AAAD/BQUF/wAAAP////////////////8AAAD/AQEB/wAAAP/+/v7///////39/f8CAgL//////wAAAP///////v7+//////8AAAD//////wEBAf8AAAD/AAAA/////////////Pz8/wMDA/8AAAD/AAAA//////8AAAD//v7+/wEBAf8AAAD/AAAA//39/f///////////wAAAP////////////39/f8BAQH//f39/wEBAf/9/f3/AQEB/wAAAP8AAAD//////wAAAP////////////v7+/8CAgL/AAAA/wAAAP//////AAAA/wAAAP8BAQH//v7+///////9/f3/AAAA//////8AAAD/+/v7/wQEBP/9/f3///////////8AAAD//////wMDA/8AAAD/AAAA//7+/v8CAgL/AAAA/wEBAf/8/Pz/BAQE//39/f///////v7+/wAAAP/9/f3/AAAA//z8/P///////f39/wEBAf8AAAD/AgIC//7+/v8AAAD/AAAA/wAAAP//////AAAA///////+/v7//////wAAAP8AAAD/AAAA//////8AAAD//////w==);
-    background-repeat: repeat-y;
-    height:50px;
+<% if (barcode_render_engine == 'bmp') { %>
+  .barcode {
+	  background-image: url(data:image/bmp;base64,<%= barcode_data %>);
+	  background-repeat: repeat-y;
+	  height: 50px;
+  }
+<% } else if (barcode_render_engine == 'css') { %>
+  .barcode {
+	height: 50px;
+  }
+
+  .barcode-line {
+	height: inherit;
+	display: inline-block;
+	float: left;
+  }
+
+  .black-line {
+	background-color: #000;
+  }
+
+  .white-line {
+	background-color: #fff;
+  }
+<% } %>
+@media print
+{
+	* {-webkit-print-color-adjust:exact;}
 }
 </style>
 <body>
@@ -327,7 +351,21 @@ img{border:0}
         <tr class="h13"><td colspan="3" /></tr>
     </table><table class="w666">
         <tr>
-		  <td class="EcdBar Al pL10"><div class="barcode"/></td>
+		  <td class="EcdBar Al pL10">
+			<% if (barcode_render_engine == 'bmp') { %>
+			  <div class="barcode"/>
+			<% } else if (barcode_render_engine == 'css') { %>
+			  <div class="barcode">
+				<% var black = true; %>
+
+				<% for(var i = 0; i < barcode_data.length; i++) { %>
+				  <% var pixelsToDraw = (barcode_data[i] == "0") ? 1 : 3; %>
+				  <div class="barcode-line <%= black ? 'black' : 'white' %>-line" style="width:<%= pixelsToDraw %>px;"></div>
+				  <% black = !black; %>
+				<% } %>
+			  </div>
+			<% } %>
+		  </td>
         </tr>
     </table><table class="ctN w666">
         <tr class="h13"><td /></tr>
