@@ -189,7 +189,7 @@
             <td class="w180">Valor documento</td>
         </tr>
         <tr class="cp h12 rBb">
-			<td><%= boleto['numero_documento'] %></td>
+			<td><%= addTrailingZeros(boleto['numero_documento'], 9) %></td>
 			<td><%= boleto['cedente_cnpj'] %></td>
 			<td><%= formatDate(boleto['data_vencimento']) %></td>
 			<td class="Ar"><%= formatAmount(boleto['valor']) %></td>
@@ -272,7 +272,7 @@
         </tr>
         <tr class="cp h12 rBb">
 			<td><%= formatDate(boleto['data_emissao']) %></td>
-			<td><%= boleto['numero_documento'] %></td>
+			<td><%= addTrailingZeros(boleto['numero_documento'], 9) %></td>
             <td>DM</td>
             <td>N</td>
 			<td><%= formatDate(boleto['data_emissao']) %></td>
