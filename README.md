@@ -7,6 +7,12 @@ Geração de boleto bancário em Node.js. Os algoritmos de geração da linha di
 
 - Santander - by [pedrofranceschi](https://github.com/pedrofranceschi)
 
+## Instalação
+
+```
+npm install node-boleto
+```
+
 ## Exemplo de uso
 
 ```javascript
