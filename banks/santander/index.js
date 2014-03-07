@@ -1,30 +1,28 @@
-var Bank = function(formatters) {
-  this.formatters = formatters;
-}
+var formatters = require('../../lib/formatters');
 
-Bank.prototype.options = {
+exports.options = {
   logoURL: 'https://pagar.me/assets/boleto/images/santander.png',
   codigo: '033'
 }
 
-Bank.prototype.dvBarra = function(barra) {
-  var resto2 = this.formatters.mod11(barra, 9, 1);
+exports.dvBarra = function(barra) {
+  var resto2 = formatters.mod11(barra, 9, 1);
   return (resto2 == 0 || resto2 == 1 || resto2 == 10) ? 1 : 11 - resto2;
 }
 
-Bank.prototype.barcodeData = function(boleto){
+exports.barcodeData = function(boleto){
   var codigoBanco = this.options.codigo;
   var numMoeda = "9";
   var fixo = "9"; // Numero fixo para a posição 05-05
   var ios = "0"; // IOS - somente para Seguradoras (Se 7% informar 7, limitado 9%) - demais clientes usar 0
   
-  var fatorVencimento = this.formatters.fatorVencimento(boleto['data_vencimento']);
+  var fatorVencimento = formatters.fatorVencimento(boleto['data_vencimento']);
 
-  var valor = this.formatters.addTrailingZeros(boleto['valor'], 10);
+  var valor = formatters.addTrailingZeros(boleto['valor'], 10);
   var carteira = boleto['carteira'];
-  var codigoCedente = this.formatters.addTrailingZeros(boleto['codigo_cedente'], 7);
+  var codigoCedente = formatters.addTrailingZeros(boleto['codigo_cedente'], 7);
 
-  var nossoNumero = this.formatters.addTrailingZeros(boleto['nosso_numero'], 12) + this.formatters.mod11(boleto['nosso_numero']);
+  var nossoNumero = formatters.addTrailingZeros(boleto['nosso_numero'], 12) + formatters.mod11(boleto['nosso_numero']);
 
   var barra = codigoBanco + numMoeda + fatorVencimento + valor + fixo + codigoCedente + nossoNumero + ios + carteira;
 
@@ -34,7 +32,7 @@ Bank.prototype.barcodeData = function(boleto){
   return lineData;
 }
 
-Bank.prototype.linhaDigitavel = function(barcodeData) {
+exports.linhaDigitavel = function(barcodeData) {
   // Posição 	Conteúdo
   // 1 a 3    Número do banco
   // 4        Código da Moeda - 9 para Real ou 8 - outras moedas
@@ -54,21 +52,21 @@ Bank.prototype.linhaDigitavel = function(barcodeData) {
   // 1. Primeiro Grupo - composto pelo código do banco, código da moéda, Valor Fixo "9"
   // e 4 primeiros digitos do PSK (codigo do cliente) e DV (modulo10) deste campo
   var campo = barcodeData.substring(0, 3) + barcodeData.substring(3, 4) + barcodeData.substring(19, 20) + barcodeData.substring(20, 24);
-  campo = campo + this.formatters.mod10(campo);
+  campo = campo + formatters.mod10(campo);
   campo = campo.substring(0, 5) + '.' + campo.substring(5, campo.length);
   campos.push(campo);
 
   // 2. Segundo Grupo - composto pelas 3 últimas posiçoes do PSK e 7 primeiros dígitos do Nosso Número
   // e DV (modulo10) deste campo
   var campo = barcodeData.substring(24, 34);
-  campo = campo + this.formatters.mod10(campo);
+  campo = campo + formatters.mod10(campo);
   campo = campo.substring(0, 5) + '.' + campo.substring(5, campo.length);
   campos.push(campo);
 
   // 3. Terceiro Grupo - Composto por : Restante do Nosso Numero (6 digitos), IOS, Modalidade da Carteira
   // e DV (modulo10) deste campo
   var campo = barcodeData.substring(34, 44);
-  campo = campo + this.formatters.mod10(campo);
+  campo = campo + formatters.mod10(campo);
   campo = campo.substring(0, 5) + '.' + campo.substring(5, campo.length);
   campos.push(campo);
 
@@ -84,5 +82,3 @@ Bank.prototype.linhaDigitavel = function(barcodeData) {
 
   return campos.join(" ");
 }
-
-module.exports = Bank;
