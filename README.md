@@ -15,8 +15,10 @@ npm install node-boleto
 
 ## Exemplo de uso
 
+Emitindo um boleto:
+
 ```javascript
-var Boleto = require('node-boleto');
+var Boleto = require('node-boleto').Boleto;
 
 var boleto = new Boleto({
   'banco': "santander", // nome do banco dentro da pasta 'banks'
@@ -37,7 +39,20 @@ console.log("Linha digitável: " + boleto['linha_digitavel'])
 boleto.renderHTML(function(html){
   console.log(html);
 });
+```
 
+Parseando o arquivo-retorno EDI do banco:
+
+```javascript
+var ediParser = require('node-boleto').ediParser,
+	fs = require('fs');
+
+var ediFileContent = fs.readFileSync("arquivo.txt").toString();
+
+var parsedFile = ediParser.parse(ediFileContent);
+
+console.log("Boletos pagos: ");
+console.log(parsedFile.boletos);
 ```
 
 ## Adicionando novos bancos
