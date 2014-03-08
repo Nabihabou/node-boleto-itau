@@ -2,7 +2,7 @@ var express = require('express');
 
 var app = express();
 
-var Boleto = require('../index');
+var Boleto = require('../index').Boleto;
 
 var boleto = new Boleto({
   'banco': "santander",

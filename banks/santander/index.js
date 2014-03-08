@@ -82,3 +82,59 @@ exports.linhaDigitavel = function(barcodeData) {
 
   return campos.join(" ");
 }
+
+exports.parseEDIFile = function(fileContent){
+  try {
+	var lines = fileContent.split("\n");
+	var parsedFile = {
+	  boletos: {}
+	};
+
+	var currentNossoNumero = null;
+
+	for(var i = 0; i < lines.length; i++) {
+	  var line = lines[i];
+	  var registro = line.substring(7, 8);
+
+	  console.log(registro);
+
+	  if(registro == '0') {
+		parsedFile['cnpj'] = line.substring(17, 32);
+		parsedFile['razao_social'] = line.substring(72, 102);
+		parsedFile['agencia_cedente'] = line.substring(32, 36);
+		parsedFile['conta_cedente'] = line.substring(37, 47);
+		parsedFile['data_arquivo'] = formatters.dateFromEdiDate(line.substring(143, 152));
+	  } else if(registro == '3') {
+		var segmento = line.substring(13, 14);
+		console.log(segmento);
+
+		if(segmento == 'T') {
+		  var boleto = {};
+
+		  boleto['codigo_ocorrencia'] = line.substring(15, 17);
+		  boleto['vencimento'] = formatters.dateFromEdiDate(line.substring(69, 77));
+		  boleto['valor'] = formatters.removeTrailingZeros(line.substring(77, 92));
+		  boleto['tarifa'] = formatters.removeTrailingZeros(line.substring(193, 208));
+		  boleto['banco_recebedor'] = formatters.removeTrailingZeros(line.substring(92, 95));
+		  boleto['agencia_recebedora'] = formatters.removeTrailingZeros(line.substring(95, 100));
+
+		  currentNossoNumero = formatters.removeTrailingZeros(line.substring(40, 52));
+		  parsedFile.boletos[currentNossoNumero] = boleto;
+		} else if(segmento == 'U') {
+		  parsedFile.boletos[currentNossoNumero]['valor_pago'] = formatters.removeTrailingZeros(line.substring(77, 92));
+
+		  var paid = parsedFile.boletos[currentNossoNumero]['valor_pago'] == parsedFile.boletos[currentNossoNumero]['valor'];
+		  paid = paid && parsedFile.boletos[currentNossoNumero]['codigo_ocorrencia'] == '17';
+
+		  parsedFile.boletos[currentNossoNumero]['pago'] = paid;
+
+		  currentNossoNumero = null;
+		}
+	  }
+	}
+
+	return parsedFile;
+  } catch(e) {
+	return null;
+  }
+};
