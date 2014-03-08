@@ -96,8 +96,6 @@ exports.parseEDIFile = function(fileContent){
 	  var line = lines[i];
 	  var registro = line.substring(7, 8);
 
-	  console.log(registro);
-
 	  if(registro == '0') {
 		parsedFile['cnpj'] = line.substring(17, 32);
 		parsedFile['razao_social'] = line.substring(72, 102);
@@ -106,7 +104,6 @@ exports.parseEDIFile = function(fileContent){
 		parsedFile['data_arquivo'] = formatters.dateFromEdiDate(line.substring(143, 152));
 	  } else if(registro == '3') {
 		var segmento = line.substring(13, 14);
-		console.log(segmento);
 
 		if(segmento == 'T') {
 		  var boleto = {};
