@@ -23,7 +23,6 @@ exports.barcodeData = function(boleto){
   var carteira = boleto['carteira'];
   var codigoCedente = formatters.addTrailingZeros(boleto['codigo_cedente'], 7);
 
-  // var nossoNumero = formatters.addTrailingZeros(boleto['nosso_numero'], 12) + formatters.mod11(boleto['nosso_numero']);
   var nossoNumero = carteira + formatters.addTrailingZeros(boleto['nosso_numero'], 11);
 
   var barra = codigoBanco + numMoeda + fatorVencimento + valor + agencia + nossoNumero + codigoCedente + '0';
