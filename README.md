@@ -5,7 +5,8 @@ Geração de boleto bancário em Node.js. Os algoritmos de geração da linha di
 
 ## Bancos suportados
 
-- Santander - by [pedrofranceschi](https://github.com/pedrofranceschi)
+- Santander - by [pedrofranceschi](https://github.com/pedrofranceschi) - homologado
+- Bradesco - by [pedrofranceschi](https://github.com/pedrofranceschi)
 
 ## Instalação
 
