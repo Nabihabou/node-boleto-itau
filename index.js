@@ -8,4 +8,4 @@ for(var i = 0; i < banksFolders.length; i++) {
 }
 
 exports.Boleto = require('./lib/boleto')(banks);
-exports.ediParser = require('./lib/edi-parser')(banks);
+exports.EdiParser = require('./lib/edi-parser')(banks);
