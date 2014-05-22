@@ -1,5 +1,5 @@
 var fs = require('fs');
 
-var ediParser = require('../index').ediParser;
+var ediParser = require('../index').EdiParser;
 
-console.log(ediParser.parse(fs.readFileSync(__dirname + "/retorno.txt").toString()));
+console.log(ediParser.parse('santander', fs.readFileSync(__dirname + "/retorno.txt").toString()));

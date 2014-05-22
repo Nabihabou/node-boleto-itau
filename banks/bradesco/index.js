@@ -1,4 +1,5 @@
-var formatters = require('../../lib/formatters');
+var formatters = require('../../lib/formatters'),
+	helper = require('./helper');
 
 exports.options = {
   logoURL: 'https://pagar.me/assets/boleto/images/bradesco.jpg',
@@ -82,55 +83,49 @@ exports.linhaDigitavel = function(barcodeData) {
   return campos.join(" ");
 }
 
-// exports.parseEDIFile = function(fileContent){
-//   try {
-// 	var lines = fileContent.split("\n");
-// 	var parsedFile = {
-// 	  boletos: {}
-// 	};
-//
-// 	var currentNossoNumero = null;
-//
-// 	for(var i = 0; i < lines.length; i++) {
-// 	  var line = lines[i];
-// 	  var registro = line.substring(7, 8);
-//
-// 	  if(registro == '0') {
-// 		parsedFile['cnpj'] = line.substring(17, 32);
-// 		parsedFile['razao_social'] = line.substring(72, 102);
-// 		parsedFile['agencia_cedente'] = line.substring(32, 36);
-// 		parsedFile['conta_cedente'] = line.substring(37, 47);
-// 		parsedFile['data_arquivo'] = formatters.dateFromEdiDate(line.substring(143, 152));
-// 	  } else if(registro == '3') {
-// 		var segmento = line.substring(13, 14);
-//
-// 		if(segmento == 'T') {
-// 		  var boleto = {};
-//
-// 		  boleto['codigo_ocorrencia'] = line.substring(15, 17);
-// 		  boleto['vencimento'] = formatters.dateFromEdiDate(line.substring(69, 77));
-// 		  boleto['valor'] = formatters.removeTrailingZeros(line.substring(77, 92));
-// 		  boleto['tarifa'] = formatters.removeTrailingZeros(line.substring(193, 208));
-// 		  boleto['banco_recebedor'] = formatters.removeTrailingZeros(line.substring(92, 95));
-// 		  boleto['agencia_recebedora'] = formatters.removeTrailingZeros(line.substring(95, 100));
-//
-// 		  currentNossoNumero = formatters.removeTrailingZeros(line.substring(40, 52));
-// 		  parsedFile.boletos[currentNossoNumero] = boleto;
-// 		} else if(segmento == 'U') {
-// 		  parsedFile.boletos[currentNossoNumero]['valor_pago'] = formatters.removeTrailingZeros(line.substring(77, 92));
-//
-// 		  var paid = parsedFile.boletos[currentNossoNumero]['valor_pago'] >= parsedFile.boletos[currentNossoNumero]['valor'];
-// 		  paid = paid && parsedFile.boletos[currentNossoNumero]['codigo_ocorrencia'] == '17';
-//
-// 		  parsedFile.boletos[currentNossoNumero]['pago'] = paid;
-//
-// 		  currentNossoNumero = null;
-// 		}
-// 	  }
-// 	}
-//
-// 	return parsedFile;
-//   } catch(e) {
-// 	return null;
-//   }
-// };
+exports.parseEDIFile = function(fileContent){
+  try {
+	var lines = fileContent.split("\n");
+	var parsedFile = {
+	  boletos: {}
+	};
+
+	var currentNossoNumero = null;
+	var hasCompanyData = false;
+
+	for(var i = 0; i < lines.length; i++) {
+	  var line = lines[i];
+	  var registro = line.substring(0, 1);
+
+	  if(registro == '0') {
+		parsedFile['razao_social'] = line.substring(46, 76);
+		parsedFile['data_arquivo'] = helper.dateFromEdiDate(line.substring(94, 100));
+	  } else if(registro == '1') {
+		var boleto = {};
+
+		parsedFile['cnpj'] = formatters.removeTrailingZeros(line.substring(3, 17));
+		parsedFile['carteira'] = formatters.removeTrailingZeros(line.substring(22, 24));
+		parsedFile['agencia_cedente'] = formatters.removeTrailingZeros(line.substring(24, 29));
+		parsedFile['conta_cedente'] = formatters.removeTrailingZeros(line.substring(29, 37));
+		
+		boleto['codigo_ocorrencia'] = line.substring(108, 110);
+		boleto['data_ocorrencia'] = helper.dateFromEdiDate(line.substring(110, 116));
+		boleto['data_credito'] = helper.dateFromEdiDate(line.substring(295, 301));
+		boleto['vencimento'] = helper.dateFromEdiDate(line.substring(110, 116));
+		boleto['valor_pago'] = formatters.removeTrailingZeros(line.substring(253, 266));
+		boleto['valor'] = formatters.removeTrailingZeros(line.substring(152, 165));
+		boleto['banco_recebedor'] = formatters.removeTrailingZeros(line.substring(165, 168));
+		boleto['agencia_recebedora'] = formatters.removeTrailingZeros(line.substring(168, 173));
+		boleto['paid'] = (parseInt(boleto['valor_pago']) >= parseInt(boleto['valor']) || boleto['codigo_ocorrencia'] == '06');
+
+		currentNossoNumero = formatters.removeTrailingZeros(line.substring(126, 145));
+		parsedFile.boletos[currentNossoNumero] = boleto;
+	  }
+	}
+
+	return parsedFile;
+  } catch(e) {
+	console.log(e);
+	return null;
+  }
+};

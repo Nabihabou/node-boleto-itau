@@ -1,4 +1,5 @@
-var formatters = require('../../lib/formatters');
+var formatters = require('../../lib/formatters'),
+	helper = require('./helper');
 
 exports.options = {
   logoURL: 'https://pagar.me/assets/boleto/images/santander.png',
@@ -101,7 +102,7 @@ exports.parseEDIFile = function(fileContent){
 		parsedFile['razao_social'] = line.substring(72, 102);
 		parsedFile['agencia_cedente'] = line.substring(32, 36);
 		parsedFile['conta_cedente'] = line.substring(37, 47);
-		parsedFile['data_arquivo'] = formatters.dateFromEdiDate(line.substring(143, 152));
+		parsedFile['data_arquivo'] = helper.dateFromEdiDate(line.substring(143, 152));
 	  } else if(registro == '3') {
 		var segmento = line.substring(13, 14);
 
