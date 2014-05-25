@@ -118,7 +118,7 @@ exports.parseEDIFile = function(fileContent){
 		boleto['agencia_recebedora'] = formatters.removeTrailingZeros(line.substring(168, 173));
 		boleto['paid'] = (parseInt(boleto['valor_pago']) >= parseInt(boleto['valor']) || boleto['codigo_ocorrencia'] == '06');
 
-		currentNossoNumero = formatters.removeTrailingZeros(line.substring(126, 145));
+		currentNossoNumero = formatters.removeTrailingZeros(line.substring(70, 81));
 		parsedFile.boletos[currentNossoNumero] = boleto;
 	  }
 	}
