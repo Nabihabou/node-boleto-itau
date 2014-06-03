@@ -15,7 +15,10 @@ var boleto = new Boleto({
   'cedente_cnpj': "18727053000174",
   'agencia': "1229",
   'codigo_cedente': "469",
-  'carteira': "25"
+  'carteira': "25",
+  'pagador': "Nome do pagador\nCPF: 000.000.000-00",
+  'local_de_pagamento': "PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO.",
+  'instrucoes': "Sr. Caixa, aceitar o pagamento e não cobrar juros após o vencimento.",
 })
 
 // console.log(boleto['linha_digitavel']);
