@@ -214,10 +214,10 @@
             <td class="w659">Pagador</td>
         </tr>
         <tr class="cp h12">
-            <td></td>
+            <td><%- boleto['pagador'] || '' %></td>
         </tr>
         <tr class="cp h12 rBb">
-            <td><br /> - / - CEP: </td>
+            <td></td>
         </tr>
     </table><table class="w666">
         <tr class="ctN h13">
@@ -299,7 +299,7 @@
         <tr class="rc6">
             <td class="w478">
                 <div class="ctN pL10">Instruções (Texto de responsabilidade do beneficiário)</div>
-                <div class="cpN pL10"></div>
+				<div class="cpN pL10"><%- boleto['instrucoes'] || '' %></div>
             </td>
             <td class="w186">
                 <div class="t">(-) Desconto / Abatimentos</div>
@@ -319,12 +319,12 @@
             <td class="w659">Pagador</td>
         </tr>
         <tr class="cp h12">
-            <td class="At"></td>
+			<td class="At"><%- boleto['pagador'] || '' %></td>
         </tr>
     </table><table class="w666">
         <tr class="rBb">
             <td class="w478 BL">
-                <div class="cpN pL6"><br /> - / - CEP: </div>
+                <div class="cpN pL6"></div>
             </td>
             <td class="Ab BL">
                 <div class="ctN pL6">Cód. baixa</div>
