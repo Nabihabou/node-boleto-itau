@@ -249,7 +249,7 @@
             <td class="w180">Vencimento</td>
         </tr>
         <tr class="cp h12 rBb">
-			<td>Até o vencimento, preferencialmente no Banco <%= capitalize(boleto['banco']) %> </td>
+			<td><%= boleto['local_de_pagamento'] %></td>
 			<td class="Ar"><%= formatDate(boleto['data_vencimento']) %></td>
         </tr>
     </table><table class="w666">
