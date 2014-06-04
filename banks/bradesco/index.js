@@ -107,8 +107,23 @@ exports.parseEDIFile = function(fileContent){
 		parsedFile['carteira'] = formatters.removeTrailingZeros(line.substring(22, 24));
 		parsedFile['agencia_cedente'] = formatters.removeTrailingZeros(line.substring(24, 29));
 		parsedFile['conta_cedente'] = formatters.removeTrailingZeros(line.substring(29, 37));
-		
+
 		boleto['codigo_ocorrencia'] = line.substring(108, 110);
+
+		var ocorrenciasStr = line.substring(318, 328);
+		var motivoOcorrencias = new Array();
+		var isPaid = (parseInt(boleto['valor_pago']) >= parseInt(boleto['valor']) || boleto['codigo_ocorrencia'] == '06');
+
+		for(var i = 0; i < ocorrenciasStr.length; i += 2) {
+		  var ocorrencia = ocorrenciasStr.substr(i, 2);
+		  motivoOcorrencias.push(ocorrencia);
+
+		  if(ocorrencia != '00') {
+			isPaid = false;
+		  }
+		}
+
+		boleto['motivo_ocorrencia'] = motivoOcorrencias;
 		boleto['data_ocorrencia'] = helper.dateFromEdiDate(line.substring(110, 116));
 		boleto['data_credito'] = helper.dateFromEdiDate(line.substring(295, 301));
 		boleto['vencimento'] = helper.dateFromEdiDate(line.substring(110, 116));
@@ -116,7 +131,7 @@ exports.parseEDIFile = function(fileContent){
 		boleto['valor'] = formatters.removeTrailingZeros(line.substring(152, 165));
 		boleto['banco_recebedor'] = formatters.removeTrailingZeros(line.substring(165, 168));
 		boleto['agencia_recebedora'] = formatters.removeTrailingZeros(line.substring(168, 173));
-		boleto['paid'] = (parseInt(boleto['valor_pago']) >= parseInt(boleto['valor']) || boleto['codigo_ocorrencia'] == '06');
+		boleto['paid'] = isPaid;
 
 		currentNossoNumero = formatters.removeTrailingZeros(line.substring(70, 81));
 		parsedFile.boletos[currentNossoNumero] = boleto;
