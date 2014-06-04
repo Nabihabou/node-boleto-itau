@@ -111,19 +111,19 @@ exports.parseEDIFile = function(fileContent){
 		boleto['codigo_ocorrencia'] = line.substring(108, 110);
 
 		var ocorrenciasStr = line.substring(318, 328);
-		var motivoOcorrencias = new Array();
+		var motivosOcorrencia = new Array();
 		var isPaid = (parseInt(boleto['valor_pago']) >= parseInt(boleto['valor']) || boleto['codigo_ocorrencia'] == '06');
 
 		for(var i = 0; i < ocorrenciasStr.length; i += 2) {
 		  var ocorrencia = ocorrenciasStr.substr(i, 2);
-		  motivoOcorrencias.push(ocorrencia);
+		  motivosOcorrencia.push(ocorrencia);
 
 		  if(ocorrencia != '00') {
 			isPaid = false;
 		  }
 		}
 
-		boleto['motivo_ocorrencia'] = motivoOcorrencias;
+		boleto['motivos_ocorrencia'] = motivosOcorrencia;
 		boleto['data_ocorrencia'] = helper.dateFromEdiDate(line.substring(110, 116));
 		boleto['data_credito'] = helper.dateFromEdiDate(line.substring(295, 301));
 		boleto['vencimento'] = helper.dateFromEdiDate(line.substring(110, 116));
