@@ -114,8 +114,8 @@ exports.parseEDIFile = function(fileContent){
 		var motivosOcorrencia = new Array();
 		var isPaid = (parseInt(boleto['valor_pago']) >= parseInt(boleto['valor']) || boleto['codigo_ocorrencia'] == '06');
 
-		for(var i = 0; i < ocorrenciasStr.length; i += 2) {
-		  var ocorrencia = ocorrenciasStr.substr(i, 2);
+		for(var j = 0; j < ocorrenciasStr.length; j += 2) {
+		  var ocorrencia = ocorrenciasStr.substr(j, 2);
 		  motivosOcorrencia.push(ocorrencia);
 
 		  if(ocorrencia != '00') {
