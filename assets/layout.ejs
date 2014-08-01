@@ -139,6 +139,10 @@
   @media print
   {
 	  * {-webkit-print-color-adjust:exact;}
+	  .no-print, .no-print *
+	  {
+		  display: none !important;
+	  }
   }
   </style>
 </head>
@@ -155,7 +159,7 @@
             <td class="At Ac">
 				<br/>
 				<form>
-					<input type="button" value="Clique aqui para imprimir" onclick="window.print();return false;" />
+					<input class="no-print" type="button" value="Clique aqui para imprimir" onclick="window.print();return false;" />
 				</form>
 			</td>
         </tr>
