@@ -45,12 +45,12 @@ boleto.renderHTML(function(html){
 Parseando o arquivo-retorno EDI do banco:
 
 ```javascript
-var ediParser = require('node-boleto').ediParser,
+var ediParser = require('node-boleto').EdiParser,
 	fs = require('fs');
 
 var ediFileContent = fs.readFileSync("arquivo.txt").toString();
 
-var parsedFile = ediParser.parse(ediFileContent);
+var parsedFile = ediParser.parse("santander", ediFileContent);
 
 console.log("Boletos pagos: ");
 console.log(parsedFile.boletos);
