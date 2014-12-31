@@ -1,4 +1,5 @@
 var formatters = require('../../lib/formatters'),
+	ediHelper = require('../../lib/edi-helper'),
 	helper = require('./helper');
 
 exports.options = {
@@ -124,7 +125,12 @@ exports.parseEDIFile = function(fileContent){
 		  var paid = parsedFile.boletos[currentNossoNumero]['valor_pago'] >= parsedFile.boletos[currentNossoNumero]['valor'];
 		  paid = paid && parsedFile.boletos[currentNossoNumero]['codigo_ocorrencia'] == '17';
 
-		  parsedFile.boletos[currentNossoNumero]['pago'] = paid;
+		  var boleto = parsedFile.boletos[currentNossoNumero];
+
+		  boleto['pago'] = paid;
+		  boleto['edi_line_number'] = i;
+		  boleto['edi_line_checksum'] = ediHelper.calculateLineChecksum(line);
+		  boleto['edi_line_fingerprint'] = boleto['edi_line_number'] + ':' + boleto['edi_line_checksum'];
 
 		  currentNossoNumero = null;
 		}

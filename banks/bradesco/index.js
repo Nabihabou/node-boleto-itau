@@ -1,4 +1,5 @@
 var formatters = require('../../lib/formatters'),
+	ediHelper = require('../../lib/edi-helper'),
 	helper = require('./helper');
 
 exports.options = {
@@ -132,6 +133,9 @@ exports.parseEDIFile = function(fileContent){
 		boleto['banco_recebedor'] = formatters.removeTrailingZeros(line.substring(165, 168));
 		boleto['agencia_recebedora'] = formatters.removeTrailingZeros(line.substring(168, 173));
 		boleto['paid'] = isPaid;
+		boleto['edi_line_number'] = i;
+		boleto['edi_line_checksum'] = ediHelper.calculateLineChecksum(line);
+		boleto['edi_line_fingerprint'] = boleto['edi_line_number'] + ':' + boleto['edi_line_checksum'];
 
 		currentNossoNumero = formatters.removeTrailingZeros(line.substring(70, 81));
 		parsedFile.boletos[currentNossoNumero] = boleto;
