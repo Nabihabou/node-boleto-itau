@@ -3,7 +3,7 @@ var formatters = require('../../lib/formatters'),
 	helper = require('./helper');
 
 exports.options = {
-  logoURL: 'https://pagar.me/assets/boleto/images/bradesco.jpg',
+  logoURL: 'https://assets.pagar.me/boleto/images/bradesco.jpg',
   codigo: '237'
 }
 

@@ -383,7 +383,7 @@
 
 				<% for(var i = 0; i < barcode_data.length; i++) { %>
 				  <% var pixelsToDraw = (barcode_data[i] == "0") ? 1 : 3; %>
-				  <img class="barcode-line" src="https://pagar.me/assets/boleto/images/<%= black ? 'b' : 'w' %>.png" height="<%= barcode_height %>px" width="<%= pixelsToDraw %>px;" border=0/>
+				  <img class="barcode-line" src="https://assets.pagar.me/boleto/images/<%= black ? 'b' : 'w' %>.png" height="<%= barcode_height %>px" width="<%= pixelsToDraw %>px;" border=0/>
 				  <% black = !black; %>
 				<% } %>
 			  </div>
