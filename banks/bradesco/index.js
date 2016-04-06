@@ -88,10 +88,9 @@ exports.parseEDIFile = function(fileContent){
   try {
 	var lines = fileContent.split("\n");
 	var parsedFile = {
-	  boletos: {}
+	  boletos: []
 	};
 
-	var currentNossoNumero = null;
 	var hasCompanyData = false;
 
 	for(var i = 0; i < lines.length; i++) {
@@ -136,9 +135,9 @@ exports.parseEDIFile = function(fileContent){
 		boleto['edi_line_number'] = i;
 		boleto['edi_line_checksum'] = ediHelper.calculateLineChecksum(line);
 		boleto['edi_line_fingerprint'] = boleto['edi_line_number'] + ':' + boleto['edi_line_checksum'];
+		boleto['nosso_numero'] = formatters.removeTrailingZeros(line.substring(70, 81));
 
-		currentNossoNumero = formatters.removeTrailingZeros(line.substring(70, 81));
-		parsedFile.boletos[currentNossoNumero] = boleto;
+		parsedFile.boletos.push(boleto);
 	  }
 	}
 
