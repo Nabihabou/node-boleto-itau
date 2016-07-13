@@ -384,12 +384,14 @@
   <script>
     (function () {
       var onLoadDocumentElement
+      var onLoadDocumentCopy
 
       onDOMReady(function () {
-        onLoadDocumentElement = hashString(document.body.children[0].innerHTML);
+        onLoadDocumentCopy = document.body.children[0].outerHTML
+        onLoadDocumentElement = hashString(onLoadDocumentCopy);
 
         onDOMChange(function () {
-          document.body.innerHTML = '<div style="margin: 50px; text-align: center;"><h1>Ocorreu um tentativa de adulteração deste boleto bancário.</h1><p>Por favor, verifique se seu computador está vulnerável e/ou visualize este boleto bancário de outro computador.</p></div>';
+          document.body.innerHTML = onLoadDocumentCopy;
         })
       })
 
@@ -402,9 +404,9 @@
       }
 
       function onDOMChange (callback) {
-        var currentDocumentElement = hashString(document.body.children[0].innerHTML);
+        var currentDocumentElement = hashString(document.body.children[0].outerHTML);
 
-        if (onLoadDocumentElement !== currentDocumentElement) return callback();
+        if (onLoadDocumentElement !== currentDocumentElement) { callback(); }
 
         setTimeout(function () {
           onDOMChange(callback);
