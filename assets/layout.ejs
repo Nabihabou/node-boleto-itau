@@ -404,9 +404,17 @@
       }
 
       function onDOMChange (callback) {
-        var currentDocumentElement = hashString(document.body.children[0].outerHTML);
+        var childContent = document.body.children[0];
 
-        if (onLoadDocumentElement !== currentDocumentElement) { callback(); }
+        if (childContent) {
+          var currentDocumentElement = hashString(childContent.outerHTML);
+
+          if (onLoadDocumentElement !== currentDocumentElement) {
+            callback();
+          }
+        } else {
+          callback();
+        }
 
         setTimeout(function () {
           onDOMChange(callback);
