@@ -1,0 +1,10 @@
+{
+  "extends": "standard",
+  "rules": {
+    "eqeqeq": "warn",
+    "no-throw-literal": "off"
+  },
+  "env": {
+    "mocha": true
+  }
+}
