@@ -4,6 +4,7 @@
   "description": "Boleto generator in Node.js",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "npm test"
   },
   "repository": {
