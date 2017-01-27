@@ -1,6 +1,8 @@
 node-boleto
 =============
 
+[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
 Geração de boleto bancário em Node.js. Os algoritmos de geração da linha digitável e do código de barras foram inspirados no [boletophp](https://github.com/BielSystems/boletophp).
 
 ## Bancos suportados
@@ -76,7 +78,7 @@ Boleto.barcodeRenderEngine = 'bmp';
 
 (The MIT License)
 
-Copyright (c) 2013-2004 Pagar.me Pagamentos S/A
+Copyright (c) 2013-2017 Pagar.me Pagamentos S/A
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
