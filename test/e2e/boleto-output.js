@@ -223,7 +223,7 @@ module.exports = (bankLogo, bankNumber, linhaDigitavel, barcode, bmpBarcode) => 
                 <td class="w659">Pagador</td>
             </tr>
             <tr class="cp h12">
-                <td>Nome do pagador<br/>CPF: 000.000.000-00</td>
+                <td>Nome do pagador<br/>CPF: 000.000.000-00&lt;script&gt;alert(1)&lt;/script&gt;</td>
             </tr>
             <tr class="cp h12 rBb">
                 <td></td>
@@ -234,7 +234,7 @@ module.exports = (bankLogo, bankNumber, linhaDigitavel, barcode, bmpBarcode) => 
                 <td class="w180 Ar">Autenticação mecânica</td>
             </tr>
             <tr class="cpN h12">
-                <td class="pL6">Sr. Caixa, aceitar o pagamento e não cobrar juros após o vencimento.</td>
+                <td class="pL6">Sr. Caixa, aceitar o pagamento e não cobrar juros após o vencimento.&lt;script&gt;alert(1)&lt;/script&gt;</td>
                 <td class="pL6 Ar"></td>
             </tr>
         </table><table class="ctN w666">
@@ -308,7 +308,7 @@ module.exports = (bankLogo, bankNumber, linhaDigitavel, barcode, bmpBarcode) => 
             <tr class="rc6">
                 <td class="w478">
                     <div class="ctN pL10">Instruções (Texto de responsabilidade do beneficiário)</div>
-            <div class="cpN pL10">Sr. Caixa, aceitar o pagamento e não cobrar juros após o vencimento.</div>
+            <div class="cpN pL10">Sr. Caixa, aceitar o pagamento e não cobrar juros após o vencimento.&lt;script&gt;alert(1)&lt;/script&gt;</div>
                 </td>
                 <td class="w186">
                     <div class="t">(-) Desconto / Abatimentos</div>
@@ -328,7 +328,7 @@ module.exports = (bankLogo, bankNumber, linhaDigitavel, barcode, bmpBarcode) => 
                 <td class="w659">Pagador</td>
             </tr>
             <tr class="cp h12">
-          <td class="At">Nome do pagador<br/>CPF: 000.000.000-00</td>
+          <td class="At">Nome do pagador<br/>CPF: 000.000.000-00&lt;script&gt;alert(1)&lt;/script&gt;</td>
             </tr>
         </table><table class="w666">
             <tr class="rBb">

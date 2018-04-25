@@ -17,9 +17,9 @@ const createBoleto = (bank) => new Boleto({
   'agencia': '1229',
   'codigo_cedente': '469',
   'carteira': '25',
-  'pagador': 'Nome do pagador\nCPF: 000.000.000-00',
+  'pagador': 'Nome do pagador\nCPF: 000.000.000-00<script>alert(1)</script>',
   'local_de_pagamento': 'PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO.',
-  'instrucoes': 'Sr. Caixa, aceitar o pagamento e não cobrar juros após o vencimento.'
+  'instrucoes': 'Sr. Caixa, aceitar o pagamento e não cobrar juros após o vencimento.<script>alert(1)</script>'
 })
 
 describe('Boleto Rendering', () => {
