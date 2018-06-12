@@ -3,6 +3,7 @@ module.exports = (bankLogo, bankNumber, linhaDigitavel, barcode, bmpBarcode) => 
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
       <title>Visualização de boleto</title>
+      <meta name="robots" content="noindex">
       <meta name="format-detection" content="telephone=no"/>
       <style media="screen, print" type="text/css">
       body
