@@ -104,7 +104,7 @@ describe('Bradesco Boleto', () => {
       boletos.forEach(boleto => {
         expect(boleto.bank.options).to.have.property('logoURL').that.contains('bradesco.jpg')
         expect(boleto.bank.options).to.have.property('codigo', '237')
-      });
+      })
     })
 
     it('contains correct codigo_banco', () => {
