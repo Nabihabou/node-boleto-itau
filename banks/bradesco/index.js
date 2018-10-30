@@ -1,3 +1,4 @@
+const moment = require('moment')
 var formatters = require('../../lib/formatters')
 var ediHelper = require('../../lib/edi-helper')
 var helper = require('./helper')
@@ -16,7 +17,7 @@ exports.barcodeData = function (boleto) {
   var codigoBanco = this.options.codigo
   var numMoeda = '9'
 
-  var fatorVencimento = formatters.fatorVencimento(boleto['data_vencimento'])
+  var fatorVencimento = formatters.fatorVencimento(moment(boleto['data_vencimento']).utc().format())
 
   var agencia = formatters.addTrailingZeros(boleto['agencia'], 4)
 

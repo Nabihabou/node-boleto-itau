@@ -5,6 +5,9 @@ node_js:
 
 language: node_js
 
+env:
+  - TZ=America/Sao_Paulo
+
 cache:
   directories:
     - node_modules

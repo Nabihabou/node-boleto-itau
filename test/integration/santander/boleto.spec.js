@@ -1,5 +1,5 @@
 const Boleto = require('../../../index').Boleto
-
+const moment = require('moment')
 const expect = require('chai').expect
 
 describe('Santander Boleto', () => {
@@ -8,8 +8,8 @@ describe('Santander Boleto', () => {
     before(() => {
       boleto = new Boleto({
         'banco': 'santander',
-        'data_emissao': new Date('2017-01-01T00:00:00Z'),
-        'data_vencimento': new Date(2017, 0, 5),
+        'data_emissao': moment('2017-01-01T00:00:00Z'),
+        'data_vencimento': moment('2017-01-05'),
         'valor': 1500,
         'nosso_numero': '6',
         'numero_documento': '1',
