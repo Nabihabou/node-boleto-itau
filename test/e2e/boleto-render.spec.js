@@ -1,3 +1,4 @@
+const moment = require('moment')
 const chai = require('chai')
 chai.use(require('chai-string'))
 const expect = chai.expect
@@ -7,8 +8,8 @@ const boletoOutput = require('./boleto-output')
 
 const createBoleto = (bank) => new Boleto({
   'banco': bank,
-  'data_emissao': new Date(2017, 0, 1),
-  'data_vencimento': new Date(2017, 0, 5),
+  'data_emissao': moment('2017-01-01').format(),
+  'data_vencimento': moment('2017-01-05').format(),
   'valor': 1500,
   'nosso_numero': '6',
   'numero_documento': '1',
