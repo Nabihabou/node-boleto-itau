@@ -1,20 +1,12 @@
 const R = require('ramda')
+const moment = require('moment')
 
 const chai = require('chai')
 chai.use(require('chai-subset'))
 chai.use(require('chai-datetime'))
 const expect = chai.expect
 
-const testBanks = {
-  test: {
-    options: {
-      logoURL: 'https://pagar.me/img.png',
-      codigo: '123'
-    },
-    barcodeData: R.always('123'),
-    linhaDigitavel: R.always('123')
-  }
-}
+const testBanks = require('../mocks/banks')
 const Boleto = require('../../lib/boleto')(testBanks)
 
 describe('Boleto Object', () => {
@@ -52,11 +44,11 @@ describe('Boleto Object', () => {
     })
 
     it('has current date as data_emissao', () => {
-      expect(boleto.data_emissao).to.equalDate(new Date())
+      expect(moment(boleto.data_emissao).format()).to.be.equal(moment().utc().format())
     })
 
     it('has five days past data_emissao as data_vencimento', () => {
-      expect(boleto.data_vencimento).to.equalDate(new Date(new Date().getTime() + (5 * 24 * 3600 * 1000)))
+      expect(moment(boleto.data_vencimento).format()).to.be.equal(moment().utc().add(5, 'days').format())
     })
   })
 
@@ -123,8 +115,8 @@ describe('Boleto Object', () => {
     })
 
     it('contains dates in options', () => {
-      expect(boleto.data_emissao).to.equalTime(boletoOptions.data_emissao)
-      expect(boleto.data_vencimento).to.equalTime(boleto.data_vencimento)
+      expect(moment(boleto.data_emissao).format()).to.be.equal(moment(boletoOptions.data_emissao).format())
+      expect(moment(boleto.data_vencimento).format()).to.be.equal(moment(boleto.data_vencimento).format())
     })
 
     it('contains formatted nosso_numero_dv', () => {
