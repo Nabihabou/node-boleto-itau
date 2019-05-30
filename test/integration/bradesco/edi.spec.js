@@ -22,7 +22,7 @@ describe('Bradesco EDI Parser', () => {
       boleto2 = result.boletos[1]
     })
 
-    it('should have found 1 boleto', () => {
+    it('should have found 2 boletos', () => {
       expect(result.boletos).to.have.lengthOf(2)
     })
 
