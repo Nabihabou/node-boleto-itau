@@ -125,7 +125,6 @@ exports.parseEDIFile = function (fileContent) {
         boleto['data_ocorrencia'] = helper.dateFromEdiDate(line.substring(110, 116))
         boleto['data_credito'] = helper.dateFromEdiDate(line.substring(295, 301))
         boleto['vencimento'] = helper.dateFromEdiDate(line.substring(110, 116))
-        boleto['valor_pago'] = formatters.removeTrailingZeros(line.substring(253, 266))
         boleto['valor'] = formatters.removeTrailingZeros(line.substring(152, 165))
         boleto['banco_recebedor'] = formatters.removeTrailingZeros(line.substring(165, 168))
         boleto['agencia_recebedora'] = formatters.removeTrailingZeros(line.substring(168, 173))
@@ -134,6 +133,14 @@ exports.parseEDIFile = function (fileContent) {
         boleto['edi_line_checksum'] = ediHelper.calculateLineChecksum(line)
         boleto['edi_line_fingerprint'] = boleto['edi_line_number'] + ':' + boleto['edi_line_checksum']
         boleto['nosso_numero'] = formatters.removeTrailingZeros(line.substring(70, 81))
+
+        boleto['juros_operacao_em_atraso'] = formatters.removeTrailingZeros(line.substring(201, 214))
+        boleto['iof_devido'] = formatters.removeTrailingZeros(line.substring(214, 227))
+        boleto['abatimento_concedido'] = formatters.removeTrailingZeros(line.substring(227, 240))
+        boleto['desconto_concedido'] = formatters.removeTrailingZeros(line.substring(240, 253))
+        boleto['valor_pago'] = formatters.removeTrailingZeros(line.substring(253, 266))
+        boleto['juros_mora'] = formatters.removeTrailingZeros(line.substring(266, 279))
+        boleto['outros_creditos'] = formatters.removeTrailingZeros(line.substring(279, 292))
 
         parsedFile.boletos.push(boleto)
       }
