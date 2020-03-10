@@ -1,6 +1,6 @@
 {
-  "name": "node-boleto",
-  "version": "2.1.1",
+  "name": "node-boleto-itau",
+  "version": "1.0",
   "description": "Boleto generator in Node.js",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pagarme/node-boleto"
+    "url": "https://github.com/nabihabou/node-boleto-itau"
   },
   "dependencies": {
     "ejs": "2.5.5"
@@ -30,7 +30,7 @@
   "author": "Pedro Franceschi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pagarme/node-boleto/issues"
+    "url": "https://github.com/nabihabou/node-boleto-itau/issues"
   },
-  "homepage": "https://github.com/pagarme/node-boleto"
+  "homepage": "https://github.com/nabihabou/node-boleto-itau"
 }
