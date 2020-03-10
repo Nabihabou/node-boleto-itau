@@ -16,7 +16,7 @@ Geração de boleto bancário em Node.js. Os algoritmos de geração da linha di
 ## Instalação
 
 ```
-npm install node-boleto
+yarn add nabihabou/node-boleto-itau
 ```
 
 ## Exemplo de uso
@@ -37,6 +37,7 @@ var boleto = new Boleto({
   'cedente_cnpj': "18727053000174", // sem pontos e traços
   'agencia': "3978",
   'codigo_cedente': "6404154", // PSK (código da carteira)
+  'digito': '8',
   'carteira': "102"
 });
 
