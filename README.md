@@ -1,5 +1,7 @@
-node-boleto
+node-boleto-itau
 =============
+
+Fork do pagarme/node-boleto com integração de boletos do Banco Itaú
 
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
@@ -9,6 +11,7 @@ Geração de boleto bancário em Node.js. Os algoritmos de geração da linha di
 
 - Santander - by [pedrofranceschi](https://github.com/pedrofranceschi) - homologado
 - Bradesco - by [pedrofranceschi](https://github.com/pedrofranceschi)
+- Itau - by [nabihabou](https://github.com/nabihabou)
 
 ## Instalação
 
