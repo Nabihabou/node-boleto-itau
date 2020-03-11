@@ -20,6 +20,7 @@ var boleto = new Boleto({
   'carteira': '109',
   'pagador': 'Nome do pagador\nCPF: 000.000.000-00',
   'local_de_pagamento': 'PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO.',
+  'demonstrativo': 'Pagamento de produtos ou serviços do Cemitério Parque RECANTO DA SAUDADE. Referente à Tx.Anual Validade/Exercício MAR/20/21.' ,
   'instrucoes': 'Sr. Caixa, aceitar o pagamento e não cobrar juros após o vencimento.'
 })
 
