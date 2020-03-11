@@ -203,7 +203,7 @@
             <td class="w180">Valor documento</td>
         </tr>
         <tr class="cp h12 rBb">
-			<td><%= addTrailingZeros(boleto['numero_documento'], 9) %></td>
+			<td><%= boleto['numero_documento'] %></td>
 			<td><%= boleto['cedente_cnpj'] %></td>
 			<td><%= formatDate(boleto['data_vencimento']) %></td>
 			<td class="Ar"><%= formatAmount(boleto['valor']) %></td>
